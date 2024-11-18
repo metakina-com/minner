@@ -343,6 +343,7 @@
 
         async function users(){
             console.log("users:");
+            return ''
             var res = await fist_contracts.methods.users(userAddres).call();
             console.log("users:",res);
             return res;
@@ -367,6 +368,7 @@
         // 是否可以维修
         async function minesCanCheck(id){
             console.log("fist_contracts.methods.minesCanCheck(id).call():",id);
+            return '';
             var res = await fist_contracts.methods.minesCanCheck(id).call();
             console.log(res);
             return res;
