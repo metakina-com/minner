@@ -130,36 +130,36 @@
         }
 
         
-        // //链接本地私有链获取web3对象
-        if (typeof web3 !== 'undefined') {
-            geweb3 = new Web3(web3.currentProvider);
-            } 
-        else{
-            geweb3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8080"));
-        }
-        //获取合约对象
-        var fist_contracts = new geweb3.eth.Contract( abi,
-        fist_contracts_path );	//
-        console.log(fist_contracts,'fist_contracts合约对象');
+        // // //链接本地私有链获取web3对象
+        // if (typeof web3 !== 'undefined') {
+        //     geweb3 = new Web3(web3.currentProvider);
+        //     } 
+        // else{
+        //     geweb3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8080"));
+        // }
+        // //获取合约对象
+        // var fist_contracts = new geweb3.eth.Contract( abi,
+        // fist_contracts_path );	//
+        // console.log(fist_contracts,'fist_contracts合约对象');
         
-        //修改方法 绑定推荐人：adds邀请人地址
-        async function bindUserWelMember(adds){
-            console.log("bindUserWelMember:",adds);
-            try{
-                let getData = null;
-                 await fist_contracts.methods.bindUserWelMember(adds).send({from:localStorage.getItem('account')})
-                  .on('receipt', (receipt) => {
-                    // receipt example
-                      getData = receipt;
-                        console.log(getData);
-                     return receipt
-                    }).on('error', (error) => {
-                        return null;
-                  });
-                  return getData;
-            }catch(e){
-                return null;
-            }
+        // //修改方法 绑定推荐人：adds邀请人地址
+        // async function bindUserWelMember(adds){
+        //     console.log("bindUserWelMember:",adds);
+        //     try{
+        //         let getData = null;
+        //          await fist_contracts.methods.bindUserWelMember(adds).send({from:localStorage.getItem('account')})
+        //           .on('receipt', (receipt) => {
+        //             // receipt example
+        //               getData = receipt;
+        //                 console.log(getData);
+        //              return receipt
+        //             }).on('error', (error) => {
+        //                 return null;
+        //           });
+        //           return getData;
+        //     }catch(e){
+        //         return null;
+        //     }
           
         }
         //修改方法 购买金币：indexs为1，2，3
