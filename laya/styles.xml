@@ -1,0 +1,5 @@
+<res>
+   <item name="res/ui/shopPanel/diban-xuanzhong.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=37,47,51,38" picType="0" scale="0"/>
+   <item name="res/ui/shopPanel/dabiankuang.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=143,0,100,0" picType="0" scale="0"/>
+   <item name="res/ui/mask.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=8,200,8,200" picType="0" scale="0"/>
+</res>

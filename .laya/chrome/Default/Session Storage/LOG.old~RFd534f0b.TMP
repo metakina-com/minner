@@ -1,0 +1,4 @@
+2022/01/07-00:02:48.349 35f0 Reusing MANIFEST F:\Products\Laya\Minings2_12_0\.laya\chrome\Default\Session Storage/MANIFEST-000001
+2022/01/07-00:02:48.350 35f0 Recovering log #3
+2022/01/07-00:02:48.350 35f0 (ignoring error) F:\Products\Laya\Minings2_12_0\.laya\chrome\Default\Session Storage/000003.log: dropping 178 bytes; Corruption: checksum mismatch
+2022/01/07-00:02:48.350 35f0 Reusing old log F:\Products\Laya\Minings2_12_0\.laya\chrome\Default\Session Storage/000003.log 

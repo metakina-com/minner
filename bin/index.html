@@ -1,0 +1,419 @@
+<html>
+
+<head>
+    <title>Mining Tycoon</title>
+    <meta charset='utf-8' />
+    <meta name='renderer' content='webkit' />
+    <meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='full-screen' content='true' />
+    <meta name='x5-fullscreen' content='true' />
+    <meta name='360-fullscreen' content='true' />
+    <meta name='laya' screenorientation='landscape' />
+    <meta http-equiv='expires' content='0' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
+    <meta http-equiv='expires' content='0' />
+    <meta http-equiv='Cache-Control' content='no-siteapp' />
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script> 
+</head>
+
+<body>
+    <script type="text/javascript">
+        var userAddres = localStorage.getItem('account');//
+        let fist_contracts_path = "0x335563fc1E522Ad581F92Fe1977A313D7a2f901d";//合约地址
+	    var abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"addr","type":"address"},{"indexed":false,"internalType":"address","name":"welMember","type":"address"},{"indexed":false,"internalType":"bool","name":"result","type":"bool"}],"name":"BindWelMember","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"addr","type":"address"},{"indexed":false,"internalType":"uint256","name":"types","type":"uint256"},{"indexed":false,"internalType":"uint8","name":"colors","type":"uint8"}],"name":"BuyMines","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"num","type":"uint256"}],"name":"GetEth","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"num","type":"uint256"}],"name":"GetGold","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"addr","type":"address"},{"indexed":false,"internalType":"uint256","name":"total","type":"uint256"}],"name":"GetMineYesterday","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"PaymentReceived","type":"event"},{"inputs":[{"internalType":"address","name":"adds","type":"address"}],"name":"bindUserWelMember","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"indexs","type":"uint8"}],"name":"buyGold","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"mid","type":"uint256"},{"internalType":"uint8","name":"colors","type":"uint8"}],"name":"buyMine","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getEth","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getGold","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"getMineYesterday","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"getMinesIndex","outputs":[{"internalType":"uint256[6]","name":"","type":"uint256[6]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint8","name":"types","type":"uint8"},{"internalType":"address","name":"addr","type":"address"}],"name":"getRewardIndex","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTodayTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint8","name":"","type":"uint8"}],"name":"goldShops","outputs":[{"internalType":"uint256","name":"goldNum","type":"uint256"},{"internalType":"uint256","name":"busdtNum","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"indirectReward","outputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"mineType","type":"uint256"},{"internalType":"uint256","name":"reward","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"mines","outputs":[{"internalType":"uint8","name":"types","type":"uint8"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"uint16","name":"gold","type":"uint16"},{"internalType":"uint256","name":"everyDay","type":"uint256"},{"internalType":"uint16","name":"reward","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"minesId","type":"uint256"}],"name":"minesCanCheck","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"myMines","outputs":[{"internalType":"uint256","name":"types","type":"uint256"},{"internalType":"uint256","name":"buyDays","type":"uint256"},{"internalType":"uint256","name":"checkTime","type":"uint256"},{"internalType":"uint256","name":"release","type":"uint256"},{"internalType":"uint8","name":"color","type":"uint8"},{"internalType":"uint256","name":"total","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ownerDeposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ownerWithdrew","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"redirectReward","outputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"mineType","type":"uint256"},{"internalType":"uint256","name":"reward","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"setDepositAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"types","type":"uint8"},{"internalType":"uint16","name":"gold","type":"uint16"}],"name":"setGold","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"name","type":"string"}],"name":"setNickName","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"types","type":"uint8"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"setPrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"types","type":"uint8"},{"internalType":"uint256[3]","name":"arr","type":"uint256[3]"}],"name":"setRewardRulers","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"setWithDrawAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"signMine","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"threeReward","outputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"mineType","type":"uint256"},{"internalType":"uint256","name":"reward","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"adds","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferbalance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"adds","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferbalanceEth","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"users","outputs":[{"internalType":"uint8","name":"mineNum","type":"uint8"},{"internalType":"address","name":"welMember","type":"address"},{"internalType":"uint256","name":"myGold","type":"uint256"},{"internalType":"uint256","name":"receiveEth","type":"uint256"},{"internalType":"uint256","name":"receiveGold","type":"uint256"},{"internalType":"uint256","name":"redirectTotal","type":"uint256"},{"internalType":"uint256","name":"indirectTotal","type":"uint256"},{"internalType":"uint256","name":"threeTotal","type":"uint256"},{"internalType":"uint256","name":"redirectNum","type":"uint256"},{"internalType":"uint256","name":"indirectNum","type":"uint256"},{"internalType":"uint256","name":"threeNum","type":"uint256"},{"internalType":"string","name":"nickName","type":"string"}],"stateMutability":"view","type":"function"},{"stateMutability":"payable","type":"receive"}]
+        /* 
+        代币1（eth）：0x6816cFDe1153506C469e4f5d05f289362b32fdd4
+
+        代币2（）：0xc6f727E584eD10825746cCd50df2083e20A2F41d
+        */
+        var ethB = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"_decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+        var ethB2 =[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"_decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+		var loadingImg = null;
+		
+        function loadingWork(){
+            var img=new Image();
+            this.loadingImg = img;
+            img.src="./res/loadingWork.png";
+            document.body.appendChild(img);
+            img.width=document.body.clientWidth
+            img.height=document.body.clientHeight
+        }
+       
+
+        function removeLoadingWork(e){
+            // console.log(img.width);//当前图片的原始宽度
+            // document.body.appendChild(this.loadingImg);
+            if(this.loadingImg == null) return;
+            document.body.removeChild(this.loadingImg)
+        }
+
+        function loadLib(url) {
+            var script = document.createElement("script");
+            script.async = false;
+            script.src = url;
+            document.body.appendChild(script);
+        }
+        //登录      
+        async function address (){
+            curAccount = "defautAccount";
+            let value ='100000000000000000000000000';
+            //登录钱包
+                const desiredNetwork = '56' // '1' 表示以太坊主网
+                //检测当前浏览器是否以太坊兼容，并进行相应的处理
+                if (typeof ethereum === 'undefined') {
+                    alert('Looks like you need a Dapp browser to get started.')  
+
+                    alert('Consider installing MetaMask!')
+                } else {
+                    //如果用户安装了MetaMask，你可以要求他们授权应用登录并获取其账号
+                    ethereum.enable()
+                        //如果用户拒绝了登录请求
+                        .catch(function (reason) {
+                            if (reason === 'User rejected provider access') {
+                                // 用户不想登录，你看该怎么办？
+                            } else {
+                                // 本不该执行到这里，但是真到这里了，说明发生了意外
+                                alert('There was an issue signing you in.')
+                            }
+                        }).then(async function (accounts) {
+                            // You also should verify the user is on the correct network:
+                            //你也可以验证用户接入了正确的网络
+                            if (ethereum.networkVersion !== desiredNetwork) {
+                                alert('This application requires the main network, please switch it in your MetaMask UI.')
+                            }
+                            //一旦获取了用户账号，你就可以签名交易
+                            curAccount = accounts[0];
+                            userAddres = accounts[0];
+                            
+                            //设置sessionStorage值
+                            localStorage.setItem('account', curAccount);
+                            let thisweb3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/a33fcf3b6b0546d28dffb41f2da7498a'));
+                            let ethb1 = new thisweb3.eth.Contract(ethB,
+                                    '0x6816cFDe1153506C469e4f5d05f289362b32fdd4');//合约币1的地址
+                            let ethb2 = new thisweb3.eth.Contract(ethB2,
+                            '0xc6f727E584eD10825746cCd50df2083e20A2F41d');//合约币2的地址
+                            /* 对币1进行授权 */
+                            // ethb1.methods.allowance(curAccount,fist_contracts_path).call().then( ( result ) => {//本项目合约的地址
+                            //     console.log(result,'resultresult');
+                            //     if(result<=0){
+                            //         ethb1.methods.approve(fist_contracts_path,value).send({from: curAccount} )//本项目合约的地址
+                            //         .then( ( result ) => {
+
+                            //     } );
+                            //     }
+                            // });
+                            /* 对币2进行授权 */
+                            // ethb2.methods.allowance(curAccount,fist_contracts_path).call().then( ( result ) => {//本项目合约的地址
+                            //     console.log(result,'resultresult');
+                            //     if(result<=0){
+                            //         ethb2.methods.approve(fist_contracts_path,value).send({from: curAccount} )//本项目合约的地址
+                            //         .then( ( result ) => {
+                            //     } );
+                            //     }
+                            // });
+                                /* 对币1进行授权 */
+                            let Authorize = await ethb1.methods.allowance(curAccount,fist_contracts_path).call()
+                            if(Authorize<=0){
+                            await ethb1.methods.approve(fist_contracts_path,value).send({from: curAccount} )//
+                            }
+                            /* 对币2进行授权 */
+                            let Authorize2 = await ethb2.methods.allowance(curAccount,fist_contracts_path).call()
+                            if(Authorize2<=0){
+                            await ethb2.methods.approve(fist_contracts_path,value).send({from: curAccount} )
+                            }
+
+
+
+                        })
+                }
+        }
+
+        
+        // //链接本地私有链获取web3对象
+        if (typeof web3 !== 'undefined') {
+            geweb3 = new Web3(web3.currentProvider);
+            } 
+        else{
+            geweb3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8080"));
+        }
+        //获取合约对象
+        var fist_contracts = new geweb3.eth.Contract( abi,
+        fist_contracts_path );	//
+        console.log(fist_contracts,'fist_contracts合约对象');
+        
+        //修改方法 绑定推荐人：adds邀请人地址
+        async function bindUserWelMember(adds){
+            console.log("bindUserWelMember:",adds);
+            try{
+                let getData = null;
+                 await fist_contracts.methods.bindUserWelMember(adds).send({from:localStorage.getItem('account')})
+                  .on('receipt', (receipt) => {
+                    // receipt example
+                      getData = receipt;
+                        console.log(getData);
+                     return receipt
+                    }).on('error', (error) => {
+                        return null;
+                  });
+                  return getData;
+            }catch(e){
+                return null;
+            }
+          
+        }
+        //修改方法 购买金币：indexs为1，2，3
+        async function buyGold(indexs){
+            console.log("buyGold:",indexs);
+            let getData = null;
+            try{
+                await fist_contracts.methods.buyGold(indexs).send({from:localStorage.getItem('account')})
+                .on('receipt', (receipt) => {
+                    // receipt example
+                      getData = receipt;
+                        console.log(getData);
+                     return receipt
+                    }).on('error', (error) => {
+                        return null;
+                  });
+                return getData;
+            }catch(e){
+                return null;
+            }
+            
+        }
+        //修改方法 购买矿机 ：mid： 1表示金矿机 2表示银矿机,colors 颜色。 你们自定义。
+        async function buyMine(mid,colors){
+            console.log("buyMine:",mid,colors);
+            let myReceipt = null;
+            try{
+                await fist_contracts.methods.buyMine(mid,colors)
+            .send({from:localStorage.getItem('account')})
+            .on('receipt', (receipt) => {
+                    // receipt example
+                    myReceipt = receipt;
+                    return receipt
+                }).on('error', (error) => {
+                    return null;
+                });
+                return myReceipt;
+            }catch(e){
+                return null;
+            }
+           
+        }
+        //修改方法 领取返佣的ETH
+        async function getEth(){
+            let getData = null;
+            try{
+            await fist_contracts.methods.getEth().send({from:localStorage.getItem('account')})
+            .on('receipt', (receipt) => {
+                    // receipt example
+                    getData = receipt;
+                    console.log(getData);
+                    return receipt
+                }).on('error', (error) => {
+                    return null;
+                });
+                return getData;
+            }catch(e){
+                return null;
+            }
+        }
+        //修改方法 领取返佣的金币
+        async function getGold(){
+            let getData = null;
+            try{
+                await fist_contracts.methods.getGold().send({from:localStorage.getItem('account')})
+                .on('receipt', (receipt) => {
+                        // receipt example
+                        getData = receipt;
+                        console.log(getData);
+                        return receipt
+                    }).on('error', (error) => {
+                        return null;
+                    });
+                    return getData;
+            }catch(e){
+                return null;
+            }
+            
+        }
+        //修改方法 每日维修：id为矿机ID
+        async function signMine(id){
+            console.log("signMine:",id);
+            let getData = null;
+            try{
+                await fist_contracts.methods.signMine(id).send({from:localStorage.getItem('account')})
+            .on('receipt', (receipt) => {
+                    // receipt example
+                    getData = receipt;
+                   
+                    return receipt
+                }).on('error', (error) => {
+                    return null;
+                });
+                return getData;
+            }catch(e){
+                return null;
+            }
+            
+        }
+        //修改方法 领取矿机奖励：id为矿机ID
+        async function getMineYesterday(id){
+            
+            let getData = null;
+            console.log("getMineYesterday:",id);
+            try{
+                await fist_contracts.methods.getMineYesterday(id).send({from:localStorage.getItem('account')})
+                .on('receipt', (receipt) => {
+                        // receipt example
+                        getData = receipt;
+                        console.log(getData);
+                        return receipt
+                    }).on('error', (error) => {
+                        return null;
+                    });
+                return getData;
+            }catch(e){
+                return null
+            }
+            
+        }
+
+        // //查询接口 获取自己的所有矿机id。返回是数组
+        // async function getMinesIndex(){
+        //     var res =  await fist_contracts.methods.getMinesIndex().call()
+        //     console.log(res);
+        //     return res
+        // }
+
+        //查询接口 获取自己的所有矿机id。返回是数组
+        async function getMinesIndex(){
+            var res =  await fist_contracts.methods.getMinesIndex(userAddres).call();
+            console.log("@@@getMinesIndex::",res);
+            return res;
+        }
+        //查询接口 金矿机和银矿机 信息的。
+         async function mines(index){
+            console.log("mines:",index);
+            var res = await fist_contracts.methods.mines(index).call();
+            console.log(res);
+            return res;
+        }
+
+
+        //查询接口 金矿机和银矿机 信息的。
+        async function mine(){
+            console.log("mines:",index);
+            var res = await fist_contracts.methods.mine().call();
+            console.log(res);
+            return res;
+        }
+
+
+        async function myMines(id){
+            console.log("mymines:",id);
+            var res = await fist_contracts.methods.myMines(id).call();
+            console.log(res);
+            return res;
+        }
+
+        async function goldShops(type){
+            console.log("goldShops:",type);
+            var res = await fist_contracts.methods.goldShops(type).call();
+            console.log(res);
+            return res;
+        }
+
+        async function users(){
+            console.log("users:");
+            var res = await fist_contracts.methods.users(userAddres).call();
+            console.log("users:",res);
+            return res;
+        }
+
+  
+
+
+        function fromWei(price){
+            let price2 = geweb3.utils.fromWei(price, "ether")
+            return price2;
+        }
+        // 查询接口 推荐人参数是1,2， 3:表示1代 2 代 3代。 返回时数组。 
+        async function getRewardIndex(index){
+            console.log("getRewardIndex:",index);
+            var res = await fist_contracts.methods.getRewardIndex(index,userAddres).call();
+            console.log(res);
+            return res;
+          
+        }
+        // 是否可以维修
+        async function minesCanCheck(id){
+            console.log("fist_contracts.methods.minesCanCheck(id).call():",id);
+            var res = await fist_contracts.methods.minesCanCheck(id).call();
+            console.log(res);
+            return res;
+          
+        }
+
+// redirectReward;
+// indirectReward;
+// threeReward; 结构体映射是这个。 1， 2 ，3 代
+     
+  
+        async function redirectReward(id){
+            var res = await fist_contracts.methods.redirectReward(id).call();
+            console.log(res);
+            return res;      
+        }
+
+     
+         async function indirectReward(id){
+            var res = await fist_contracts.methods.indirectReward(id).call();
+            console.log(res);
+            return res;      
+        }
+
+
+        async function threeReward(id){
+            var res = await fist_contracts.methods.threeReward(id).call();
+            console.log(res);
+            return res;      
+        }
+
+        async function getTodayTime(){
+            var res = await fist_contracts.methods.getTodayTime().call();
+            return res;      
+        }
+
+        function isAddress(to){
+            let isAddress = geweb3.utils.isAddress(to);
+            return isAddress;
+        }
+
+        async function setNickName(str){
+            let getData = null;
+            console.log("setNickName===:",str);
+            try{
+                await fist_contracts.methods.setNickName(str).send({from:localStorage.getItem('account')})
+                .on('receipt', (receipt) => {
+                        // receipt example
+                        getData = receipt;
+                        console.log(getData);
+                        return receipt
+                    }).on('error', (error) => {
+                        return null;
+                    });
+                return getData;
+            }catch(e){
+                return null
+            }
+        }
+        
+        
+    </script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
