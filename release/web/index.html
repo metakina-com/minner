@@ -137,36 +137,38 @@
         // else{
         //     geweb3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8080"));
         // }
-        let thisweb3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/a33fcf3b6b0546d28dffb41f2da7498a'));
+        // let thisweb3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/a33fcf3b6b0546d28dffb41f2da7498a'));
 
-        //获取合约对象
-        var fist_contracts = new thisweb3.eth.Contract( abi,
-        fist_contracts_path );	//
-        console.log(fist_contracts,'fist_contracts合约对象');
+        // //获取合约对象
+        // var fist_contracts = new thisweb3.eth.Contract( abi,
+        // fist_contracts_path );	//
+        // console.log(fist_contracts,'fist_contracts合约对象');
         
-        //修改方法 绑定推荐人：adds邀请人地址
-        async function bindUserWelMember(adds){
-            console.log("bindUserWelMember:",adds);
-            try{
-                let getData = null;
-                 await fist_contracts.methods.bindUserWelMember(adds).send({from:localStorage.getItem('account')})
-                  .on('receipt', (receipt) => {
-                    // receipt example
-                      getData = receipt;
-                        console.log(getData);
-                     return receipt
-                    }).on('error', (error) => {
-                        return null;
-                  });
-                  return getData;
-            }catch(e){
-                return null;
-            }
+        // //修改方法 绑定推荐人：adds邀请人地址
+        // async function bindUserWelMember(adds){
+        //     console.log("bindUserWelMember:",adds);
+        //     try{
+        //         let getData = null;
+        //          await fist_contracts.methods.bindUserWelMember(adds).send({from:localStorage.getItem('account')})
+        //           .on('receipt', (receipt) => {
+        //             // receipt example
+        //               getData = receipt;
+        //                 console.log(getData);
+        //              return receipt
+        //             }).on('error', (error) => {
+        //                 return null;
+        //           });
+        //           return getData;
+        //     }catch(e){
+        //         return null;
+        //     }
           
-        }
+        // }
         //修改方法 购买金币：indexs为1，2，3
         async function buyGold(indexs){
             console.log("buyGold:",indexs);
+            return null;
+
             let getData = null;
             try{
                 await fist_contracts.methods.buyGold(indexs).send({from:localStorage.getItem('account')})
@@ -187,7 +189,8 @@
         //修改方法 购买矿机 ：mid： 1表示金矿机 2表示银矿机,colors 颜色。 你们自定义。
         async function buyMine(mid,colors){
             console.log("buyMine:",mid,colors);
-            let myReceipt = null;
+                return null;
+                let myReceipt = null;
             try{
                 await fist_contracts.methods.buyMine(mid,colors)
             .send({from:localStorage.getItem('account')})
@@ -207,6 +210,7 @@
         //修改方法 领取返佣的ETH
         async function getEth(){
             let getData = null;
+            return null;
             try{
             await fist_contracts.methods.getEth().send({from:localStorage.getItem('account')})
             .on('receipt', (receipt) => {
@@ -225,6 +229,7 @@
         //修改方法 领取返佣的金币
         async function getGold(){
             let getData = null;
+            return null;
             try{
                 await fist_contracts.methods.getGold().send({from:localStorage.getItem('account')})
                 .on('receipt', (receipt) => {
@@ -245,6 +250,7 @@
         async function signMine(id){
             console.log("signMine:",id);
             let getData = null;
+            return null;
             try{
                 await fist_contracts.methods.signMine(id).send({from:localStorage.getItem('account')})
             .on('receipt', (receipt) => {
@@ -266,6 +272,7 @@
             
             let getData = null;
             console.log("getMineYesterday:",id);
+            return null;
             try{
                 await fist_contracts.methods.getMineYesterday(id).send({from:localStorage.getItem('account')})
                 .on('receipt', (receipt) => {
@@ -292,14 +299,16 @@
 
         //查询接口 获取自己的所有矿机id。返回是数组
         async function getMinesIndex(){
-            var res =  await fist_contracts.methods.getMinesIndex(userAddres).call();
+                return [];
+                var res =  await fist_contracts.methods.getMinesIndex(userAddres).call();
             console.log("@@@getMinesIndex::",res);
             console.log(res);
             return res;
         }
         //查询接口 金矿机和银矿机 信息的。
          async function mines(index){
-            console.log("mines:",index);
+                return [];
+                console.log("mines:",index);
             var res = await fist_contracts.methods.mines(index).call();
             console.log(res);
             return res;
@@ -309,7 +318,8 @@
         //查询接口 金矿机和银矿机 信息的。
         async function mine(){
             console.log("mines:",index);
-            var res = await fist_contracts.methods.mine().call();
+                return [];
+                var res = await fist_contracts.methods.mine().call();
             console.log(res);
             return res;
         }
@@ -317,14 +327,16 @@
 
         async function myMines(id){
             console.log("mymines:",id);
-            var res = await fist_contracts.methods.myMines(id).call();
+                return '';
+                var res = await fist_contracts.methods.myMines(id).call();
             console.log(res);
             return res;
         }
 
         async function goldShops(type){
             console.log("goldShops:",type);
-            var res = await fist_contracts.methods.goldShops(type).call();
+                return null;
+                var res = await fist_contracts.methods.goldShops(type).call();
             console.log(res);
             return res;
         }
@@ -346,7 +358,8 @@
         // 查询接口 推荐人参数是1,2， 3:表示1代 2 代 3代。 返回时数组。 
         async function getRewardIndex(index){
             console.log("getRewardIndex:",index);
-            var res = await fist_contracts.methods.getRewardIndex(index,userAddres).call();
+                return null;
+                var res = await fist_contracts.methods.getRewardIndex(index,userAddres).call();
             console.log(res);
             return res;
           
@@ -366,27 +379,31 @@
      
   
         async function redirectReward(id){
-            var res = await fist_contracts.methods.redirectReward(id).call();
+                return null;
+                var res = await fist_contracts.methods.redirectReward(id).call();
             console.log(res);
             return res;      
         }
 
      
          async function indirectReward(id){
-            var res = await fist_contracts.methods.indirectReward(id).call();
+                return null;
+                var res = await fist_contracts.methods.indirectReward(id).call();
             console.log(res);
             return res;      
         }
 
 
         async function threeReward(id){
-            var res = await fist_contracts.methods.threeReward(id).call();
+                return null;
+                var res = await fist_contracts.methods.threeReward(id).call();
             console.log(res);
             return res;      
         }
 
         async function getTodayTime(){
-            var res = await fist_contracts.methods.getTodayTime().call();
+                return null;
+                var res = await fist_contracts.methods.getTodayTime().call();
             return res;      
         }
 
@@ -398,6 +415,7 @@
         async function setNickName(str){
             let getData = null;
             console.log("setNickName===:",str);
+            return null;
             try{
                 await fist_contracts.methods.setNickName(str).send({from:localStorage.getItem('account')})
                 .on('receipt', (receipt) => {
