@@ -113,15 +113,15 @@
                             //     }
                             // });
                                 /* 对币1进行授权 */
-                            let Authorize = await ethb1.methods.allowance(curAccount,fist_contracts_path).call()
-                            if(Authorize<=0){
-                            await ethb1.methods.approve(fist_contracts_path,value).send({from: curAccount} )//
-                            }
-                            /* 对币2进行授权 */
-                            let Authorize2 = await ethb2.methods.allowance(curAccount,fist_contracts_path).call()
-                            if(Authorize2<=0){
-                            await ethb2.methods.approve(fist_contracts_path,value).send({from: curAccount} )
-                            }
+                            // let Authorize = await ethb1.methods.allowance(curAccount,fist_contracts_path).call()
+                            // if(Authorize<=0){
+                            // await ethb1.methods.approve(fist_contracts_path,value).send({from: curAccount} )//
+                            // }
+                            // /* 对币2进行授权 */
+                            // let Authorize2 = await ethb2.methods.allowance(curAccount,fist_contracts_path).call()
+                            // if(Authorize2<=0){
+                            // await ethb2.methods.approve(fist_contracts_path,value).send({from: curAccount} )
+                            // }
 
 
 
