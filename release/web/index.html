@@ -79,9 +79,9 @@
                         }).then(async function (accounts) {
                             // You also should verify the user is on the correct network:
                             //你也可以验证用户接入了正确的网络
-                            if (ethereum.networkVersion !== desiredNetwork) {
-                                alert('This application requires the main network, please switch it in your MetaMask UI.')
-                            }
+                            // if (ethereum.networkVersion !== desiredNetwork) {
+                            //     alert('This application requires the main network, please switch it in your MetaMask UI.')
+                            // }
                             //一旦获取了用户账号，你就可以签名交易
                             curAccount = accounts[0];
                             userAddres = accounts[0];
